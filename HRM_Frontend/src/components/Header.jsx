@@ -3,6 +3,7 @@ import products from '../data/products';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef(null);
 
   const goHome = (e) => {
@@ -17,6 +18,14 @@ const Header = () => {
   };
 
   useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 100);
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
     const onDoc = (e) => {
       if (!menuRef.current) return;
       if (!menuRef.current.contains(e.target)) setOpen(false);
@@ -26,7 +35,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="bg-gradient-to-r from-rose-600 via-rose-500 to-rose-400 text-white shadow-md">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-gradient-to-r from-rose-600 via-rose-500 to-rose-400 shadow-md' : 'bg-black/30 backdrop-blur-sm'} text-white`}>
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
         <a href="#" onClick={goHome} className="text-xl font-extrabold tracking-tight drop-shadow">EnergyHub</a>
 

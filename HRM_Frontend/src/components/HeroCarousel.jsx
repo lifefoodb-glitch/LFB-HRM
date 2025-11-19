@@ -5,12 +5,8 @@ const HeroCarousel = ({ images = [], interval = 3500 }) => {
   const [validImages, setValidImages] = useState([]);
 
   useEffect(() => {
-    // Filter images: accept URLs from image CDNs (unsplash, pexels, etc.) or with image extensions
-    const filtered = (images || []).filter((u) => {
-      if (typeof u !== 'string') return false;
-      // Accept unsplash, pexels, pixabay, or any URL with image extension
-      return /unsplash|pexels|pixabay|images\.|\.(?:png|jpe?g|gif|webp|avif)/i.test(u);
-    });
+    // Accept all truthy image values (local paths from imports, or URLs)
+    const filtered = (images || []).filter((u) => u && (typeof u === 'string' || typeof u === 'object'));
     setValidImages(filtered);
   }, [images]);
 
@@ -25,11 +21,17 @@ const HeroCarousel = ({ images = [], interval = 3500 }) => {
   );
 
   return (
-    <div className="relative w-full h-64 sm:h-80 overflow-hidden rounded-lg shadow-sm">
+    <div className="relative w-screen h-[66vh] overflow-hidden">
       <div
         className="w-full h-full bg-center bg-cover transition-all duration-500"
-        style={{ backgroundImage: `url(${validImages[index]})` }}
+        style={{ backgroundImage: `url(${typeof validImages[index] === 'object' ? validImages[index].src : validImages[index]})` }}
       />
+
+      {typeof validImages[index] === 'object' && validImages[index].name && (
+        <div className="absolute inset-x-0 top-4 text-center text-white drop-shadow-lg">
+          <h2 className="text-2xl font-bold">{validImages[index].name}</h2>
+        </div>
+      )}
 
       <div className="absolute inset-x-0 bottom-4 flex justify-center gap-2">
         {validImages.map((_, i) => (
