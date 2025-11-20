@@ -13,6 +13,7 @@ import Nimboo_Pani_250 from '../Product_Image/Nimboo_Pani_250.png';
 import fizzy_club_soda_pet from '../Product_Image/fizzy_club_soda_pet.png';
 import fizzy_green_apple from '../Product_Image/fizzy_green_apple.png';
 import fizzy_litchi from '../Product_Image/fizzy_litchi.png';
+import reboost from '../Product_Image/Reboost.png';
 
 const productImages = [
 	{ src: ARNA_CAN330, name: 'ARNA CAN 330' },
@@ -29,6 +30,7 @@ const productImages = [
 	{ src: fizzy_club_soda_pet, name: 'Fizzy Club Soda' },
 	{ src: fizzy_green_apple, name: 'Fizzy Green Apple' },
 	{ src: fizzy_litchi, name: 'Fizzy Litchi' },
+	{ src: reboost, name: 'REBOOST' },
 ];
 
 export default productImages;

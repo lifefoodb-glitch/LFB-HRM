@@ -1,5 +1,6 @@
 import React from 'react';
 import HeroCarousel from '../components/HeroCarousel';
+import ProductCarousel from '../components/ProductCarousel';
 import heroImages from '../assets/hero_image';
 import productImages from '../assets/product_image';
 import About from './About';
@@ -11,6 +12,9 @@ const Home = () => {
       <div className="w-full">
         <HeroCarousel images={heroImages} />
       </div>
+
+      {/* Product Carousel Section */}
+      <ProductCarousel />
 
       <div className="max-w-6xl mx-auto px-4 py-12">
         <section>
